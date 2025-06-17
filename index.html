@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>supper funny login hahahaha</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body, html {
+      height: 100%;
+      background: url("https://wallpaperaccess.com/full/2092433.jpg") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    nav {
+      background: rgba(0,0,0,0.6);
+      padding: 1rem 2rem;
+      display: flex;
+      gap: 2rem;
+      font-weight: bold;
+      color: white;
+      user-select: none;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* Center container */
+    .form-wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    /* Glass container */
+    .glass-container {
+      background: rgba(255 255 255 / 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      width: 400px;
+      max-width: 90vw;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Header */
+    .glass-container h2 {
+      text-align: center;
+      color: white;
+      padding: 1.5rem 0 0.5rem;
+      font-weight: 700;
+      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+    }
+
+    /* Toggle links container */
+    .toggle-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .toggle-links button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      transition: color 0.3s;
+    }
+    .toggle-links button.active {
+      border-bottom: 2px solid #4a90e2;
+      color: #4a90e2;
+    }
+    .toggle-links button:hover:not(.active) {
+      color: #a0c4ff;
+    }
+
+    /* Forms slider container */
+    .forms-slider {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 200%;
+      transition: transform 0.5s ease;
+      overflow: hidden;
+    }
+
+    /* Individual forms containers */
+    #login-form, #register-form {
+      width: 100%;
+      padding: 0 1.5rem 2rem;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    /* Form styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      color: white;
+      text-shadow: 0 0 3px rgba(0,0,0,0.6);
+    }
+    label {
+      font-weight: 600;
+      color: white;
+      text-shadow: 0 0 3px rgba(0,0,0,0.7);
+    }
+    input {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255 255 255 / 0.7);
+      background: rgba(255 255 255 / 0.15);
+      color: white;
+      font-size: 1rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+    input::placeholder {
+      color: rgba(255 255 255 / 0.7);
+    }
+    input:focus {
+      border-color: #4a90e2;
+      box-shadow: 0 0 8px #4a90e2;
+      background: rgba(255 255 255 / 0.25);
+    }
+
+    /* Buttons */
+    button.login-btn, button.register-btn {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: none;
+      background: #4a90e2;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      user-select: none;
+    }
+    button.login-btn:hover, button.register-btn:hover {
+      background: #357ab8;
+    }
+
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Help</a>
+  </nav>
+
+  <div class="form-wrapper">
+    <div class="glass-container">
+      <h2 id="form-title">Login</h2>
+
+      <div class="toggle-links">
+        <button id="login-tab" class="active">Login</button>
+        <button id="register-tab">Register</button>
+      </div>
+
+      <div class="forms-slider" id="forms-slider">
+        <section id="login-form">
+          <form id="loginForm">
+            <label for="login-email">Email address</label>
+            <input type="email" id="login-email" placeholder="you@example.com" required />
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" placeholder="Enter password" required />
+            <button type="submit" class="login-btn">Sign In</button>
+          </form>
+        </section>
+
+        <section id="register-form">
+          <form id="registerForm">
+            <label for="register-email">Email address</label>
+            <input type="email" id="register-email" placeholder="you@example.com" required />
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" placeholder="Enter password" required />
+            <label for="register-confirm-password">Confirm Password</label>
+            <input type="password" id="register-confirm-password" placeholder="Confirm password" required />
+            <button type="submit" class="register-btn">Register</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const loginTab = document.getElementById('login-tab');
+    const registerTab = document.getElementById('register-tab');
+    const formsSlider = document.getElementById('forms-slider');
+    const formTitle = document.getElementById('form-title');
+
+    loginTab.addEventListener('click', () => {
+      formsSlider.style.transform = 'translateX(0)';
+      loginTab.classList.add('active');
+      registerTab.classList.remove('active');
+      formTitle.textContent = 'Login';
+    });
+
+    registerTab.addEventListener('click', () => {
+      formsSlider.style.transform = 'translateX(-50%)';
+      registerTab.classList.add('active');
+      loginTab.classList.remove('active');
+      formTitle.textContent = 'Register';
+    });
+
+    // Login form submit redirect
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Normally validate & send to server here
+      // For demo: redirect to dashboard.html
+      window.location.href = 'dashboard.html';
+    });
+
+    // Register form submit alert (or implement your own logic)
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const password = document.getElementById('register-password').value;
+      const confirmPassword = document.getElementById('register-confirm-password').value;
+      if(password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+      alert("Registered! (Demo action)");
+      // Here you can add registration logic or redirect
+    });
+  </script>
+</body>
+</html>
