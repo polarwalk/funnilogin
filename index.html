@@ -5,43 +5,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>supper funny login hahahaha</title>
   <style>
-    /* Reset & base */
+    :root {
+      --text-color: white;
+      --nav-bg: rgba(255 255 255 / 0.15);
+      --nav-border: rgba(255 255 255 / 0.6);
+      --nav-shadow-inset: rgba(255 255 255 / 0.7);
+      --nav-shadow: rgba(0,0,0,0.25);
+      --form-bg: rgba(255 255 255 / 0.1);
+      --form-border: rgba(255 255 255 / 0.3);
+      --form-shadow: rgba(0,0,0,0.25);
+    }
+    .dark {
+      --text-color: #ddd;
+      --nav-bg: rgba(20 20 20 / 0.5);
+      --nav-border: rgba(100 100 100 / 0.7);
+      --nav-shadow-inset: rgba(255 255 255 / 0.1);
+      --nav-shadow: rgba(0,0,0,0.8);
+      --form-bg: rgba(30 30 30 / 0.5);
+      --form-border: rgba(100 100 100 / 0.7);
+      --form-shadow: rgba(0,0,0,0.8);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
     }
+
     body, html {
       height: 100%;
       background: url("https://wallpaperaccess.com/full/2092433.jpg") no-repeat center center fixed;
       background-size: cover;
       display: flex;
       flex-direction: column;
-      color: white;
+      color: var(--text-color);
     }
 
-    /* Navbar */
     nav {
-      background: rgba(0,0,0,0.6);
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       padding: 1rem 2rem;
       display: flex;
       gap: 2rem;
       font-weight: bold;
-      color: white;
-      user-select: none;
+      border-radius: 12px;
+      margin: 1rem;
+      border: 1.5px solid var(--nav-border);
+      box-shadow:
+        inset 0 0 15px var(--nav-shadow-inset),
+        0 8px 32px var(--nav-shadow);
+      align-items: center;
     }
+
     nav a {
-      color: white;
+      color: var(--text-color);
       text-decoration: none;
       font-weight: bold;
     }
+
     nav a:hover {
       text-decoration: underline;
       cursor: pointer;
     }
 
-    /* Center container */
+    .dark-mode-toggle {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      color: var(--text-color);
+      user-select: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .dark-mode-toggle input[type="checkbox"] {
+      width: 40px;
+      height: 20px;
+      position: relative;
+      appearance: none;
+      background: #ccc;
+      outline: none;
+      border-radius: 20px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .dark-mode-toggle input[type="checkbox"]:checked {
+      background: #4f8cff;
+    }
+
+    .dark-mode-toggle input[type="checkbox"]::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: white;
+      transition: 0.3s;
+      transform: translateY(-50%);
+    }
+
+    .dark-mode-toggle input[type="checkbox"]:checked::before {
+      transform: translate(18px, -50%);
+    }
+
     .form-wrapper {
       flex: 1;
       display: flex;
@@ -50,109 +124,91 @@
       padding: 2rem;
     }
 
-    /* Glass container with Apple liquid glass style */
     .glass-container {
-      background: rgba(255 255 255 / 0.15);
+      background: var(--form-bg);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      border-radius: 16px;
       width: 400px;
       max-width: 90vw;
-      overflow: hidden;
-      user-select: none;
-
-      /* Apple liquid glass style border */
-      border: 1.5px solid rgba(255 255 255 / 0.6);
+      border: 1.5px solid var(--form-border);
       box-shadow:
-        inset 0 0 15px rgba(255 255 255 / 0.7),
-        0 8px 32px rgba(0,0,0,0.25);
+        0 8px 32px var(--form-shadow);
+      overflow: hidden;
     }
 
-    /* Header */
     .glass-container h2 {
       text-align: center;
-      color: white;
-      padding: 1.5rem 0 0.5rem;
-      font-weight: 700;
-      text-shadow: 0 0 5px rgba(0,0,0,0.7);
+      margin: 1rem 0;
+      color: var(--text-color);
     }
 
-    /* Toggle links container */
     .toggle-links {
       display: flex;
       justify-content: center;
       gap: 1.5rem;
       margin-bottom: 1rem;
     }
+
     .toggle-links button {
       background: transparent;
       border: none;
-      color: white;
+      color: var(--text-color);
       font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
       padding: 0.25rem 0.5rem;
-      transition: color 0.3s;
+      transition: color 0.3s, border-bottom-color 0.3s;
     }
+
     .toggle-links button.active {
       border-bottom: 2px solid #4a90e2;
       color: #4a90e2;
     }
-    .toggle-links button:hover:not(.active) {
-      color: #a0c4ff;
-    }
 
-    /* Forms slider container */
     .forms-slider {
       display: grid;
       grid-template-columns: 1fr 1fr;
       width: 200%;
       transition: transform 0.5s ease;
-      overflow: hidden;
     }
 
-    /* Individual forms containers */
     #login-form, #register-form {
       width: 100%;
-      padding: 0 1.5rem 2rem;
-      box-sizing: border-box;
-      overflow: hidden;
     }
 
-    /* Form styles */
     form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      color: white;
-      text-shadow: 0 0 3px rgba(0,0,0,0.6);
+      padding: 1rem;
     }
+
     label {
       font-weight: 600;
-      color: white;
-      text-shadow: 0 0 3px rgba(0,0,0,0.7);
+      color: var(--text-color);
     }
+
     input {
       padding: 0.75rem;
       border-radius: 8px;
       border: 1px solid rgba(255 255 255 / 0.7);
-      background: rgba(255 255 255 / 0.15);
-      color: white;
+      background: rgba(255 255 255 / 0.1);
+      color: var(--text-color);
       font-size: 1rem;
-      transition: border-color 0.3s, box-shadow 0.3s;
-      outline: none;
+      transition: background-color 0.3s, border-color 0.3s, color 0.3s;
     }
+
     input::placeholder {
       color: rgba(255 255 255 / 0.7);
     }
+
     input:focus {
       border-color: #4a90e2;
-      box-shadow: 0 0 8px #4a90e2;
-      background: rgba(255 255 255 / 0.25);
+      background: rgba(255 255 255 / 0.2);
+      outline: none;
     }
 
-    /* Buttons */
     button.login-btn, button.register-btn {
       padding: 0.75rem;
       border-radius: 8px;
@@ -162,21 +218,19 @@
       font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s;
-      user-select: none;
+      transition: background-color 0.3s;
     }
+
     button.login-btn:hover, button.register-btn:hover {
       background: #357ab8;
     }
 
-    /* Error message style */
     .error-message {
       color: #ff6b6b;
       background-color: rgba(255, 107, 107, 0.2);
       border-radius: 6px;
       padding: 0.5rem;
       font-size: 0.9rem;
-      margin-bottom: 1rem;
       text-align: center;
     }
   </style>
@@ -186,36 +240,34 @@
     <a href="#">Home</a>
     <a href="#">About</a>
     <a href="#">Help</a>
+    <label class="dark-mode-toggle" for="darkModeSwitch">
+      Dark Mode
+      <input type="checkbox" id="darkModeSwitch" />
+    </label>
   </nav>
 
   <div class="form-wrapper">
     <div class="glass-container">
       <h2 id="form-title">Login</h2>
-
       <div class="toggle-links">
         <button id="login-tab" class="active">Login</button>
         <button id="register-tab">Register</button>
       </div>
-
       <div class="forms-slider" id="forms-slider">
         <section id="login-form">
-          <!-- Login error message container -->
           <div id="login-error" class="error-message" style="display:none;"></div>
-
           <form id="loginForm">
             <label for="login-email">Email address</label>
-            <input type="email" id="login-email" placeholder="you@example.com" required pattern=".+\.com" title="Email must end with .com" />
+            <input type="email" id="login-email" placeholder="you@example.com" required />
             <label for="login-password">Password</label>
             <input type="password" id="login-password" placeholder="Enter password" required />
             <button type="submit" class="login-btn">Sign In</button>
           </form>
         </section>
-
         <section id="register-form">
           <form id="registerForm">
-            <div id="register-error" class="error-message" style="display:none;"></div>
             <label for="register-email">Email address</label>
-            <input type="email" id="register-email" placeholder="you@example.com" required pattern=".+\.com" title="Email must end with .com" />
+            <input type="email" id="register-email" placeholder="you@example.com" required />
             <label for="register-password">Password</label>
             <input type="password" id="register-password" placeholder="Enter password" required />
             <label for="register-confirm-password">Confirm Password</label>
@@ -232,8 +284,8 @@
     const registerTab = document.getElementById('register-tab');
     const formsSlider = document.getElementById('forms-slider');
     const formTitle = document.getElementById('form-title');
+    const loginForm = document.getElementById('loginForm');
     const loginError = document.getElementById('login-error');
-    const registerError = document.getElementById('register-error');
 
     loginTab.addEventListener('click', () => {
       formsSlider.style.transform = 'translateX(0)';
@@ -241,7 +293,6 @@
       registerTab.classList.remove('active');
       formTitle.textContent = 'Login';
       loginError.style.display = 'none';
-      registerError.style.display = 'none';
     });
 
     registerTab.addEventListener('click', () => {
@@ -250,97 +301,48 @@
       loginTab.classList.remove('active');
       formTitle.textContent = 'Register';
       loginError.style.display = 'none';
-      registerError.style.display = 'none';
     });
 
-    // Allowed users for login
-    const allowedUsers = [
-      { email: "kurt.tran.2005@gmail.com", password: "HolaSoyDora#69" },
-      { email: "Russi9@mail.ru", password: "Vodka9" }
-    ];
-
-    // Login form submit
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
       loginError.style.display = 'none';
-      loginError.textContent = '';
 
       const email = document.getElementById('login-email').value.trim();
       const password = document.getElementById('login-password').value;
 
-      // Check allowed users
-      const isValid = allowedUsers.some(user => user.email.toLowerCase() === email.toLowerCase() && user.password === password);
-
-      if (isValid) {
-        const beep = new Audio('https://www.myinstants.com/media/sounds/flashbanggg.mp3');
-        beep.play();
-
-        document.body.style.background = "white";
-        document.body.style.color = "black";
-        document.body.innerHTML = "<h1>hi</h1>";
+      if (
+        (email === "kurt.tran.2005@gmail.com" && password === "HolaSoyDora#69") ||
+        (email === "Russi9@mail.ru" && password === "Vodka9") ||
+        (email === "test@test.com" && password === "Test")
+      ) {
+        localStorage.setItem('loggedInEmail', email);
+        window.location.href = "dashboard.html";
       } else {
         loginError.textContent = "Invalid email or password.";
         loginError.style.display = "block";
       }
     });
 
-    // Register form submit with password requirements and error display
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+    // Dark mode toggle logic
+    const toggle = document.getElementById('darkModeSwitch');
 
-      registerError.style.display = 'none';
-      registerError.textContent = '';
+    // Light mode default: add .dark class only if 'enabled'
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add('dark');
+      toggle.checked = true;
+    } else {
+      document.body.classList.remove('dark');
+      toggle.checked = false;
+    }
 
-      const password = document.getElementById('register-password').value;
-      const confirmPassword = document.getElementById('register-confirm-password').value;
-
-      if (password !== confirmPassword) {
-        registerError.textContent = "Passwords do not match!";
-        registerError.style.display = 'block';
-        return;
+    toggle.addEventListener('change', () => {
+      if (toggle.checked) {
+        document.body.classList.add('dark');
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        document.body.classList.remove('dark');
+        localStorage.setItem('darkMode', 'disabled');
       }
-
-      // Password requirements:
-      const lengthRequirement = password.length >= 8;
-      const uppercaseRequirement = /[A-Z]/.test(password);
-      const lowercaseRequirement = /[a-z]/.test(password);
-      const numberRequirement = /[0-9]/.test(password);
-      const specialCharRequirement = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-      if (!lengthRequirement) {
-        registerError.textContent = "Password must be at least 8 characters long.";
-        registerError.style.display = 'block';
-        return;
-      }
-      if (!uppercaseRequirement) {
-        registerError.textContent = "Password must contain at least one uppercase letter.";
-        registerError.style.display = 'block';
-        return;
-      }
-      if (!lowercaseRequirement) {
-        registerError.textContent = "Password must contain at least one lowercase letter.";
-        registerError.style.display = 'block';
-        return;
-      }
-      if (!numberRequirement) {
-        registerError.textContent = "Password must contain at least one number.";
-        registerError.style.display = 'block';
-        return;
-      }
-      if (!specialCharRequirement) {
-        registerError.textContent = "Password must contain at least one special character.";
-        registerError.style.display = 'block';
-        return;
-      }
-
-      alert("Registered! (Demo action)");
-      formsSlider.style.transform = 'translateX(0)';
-      loginTab.classList.add('active');
-      registerTab.classList.remove('active');
-      formTitle.textContent = 'Login';
-      registerError.style.display = 'none';
-
-      this.reset();
     });
   </script>
 </body>
