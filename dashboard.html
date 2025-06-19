@@ -83,7 +83,6 @@
       cursor: pointer;
     }
 
-    /* Container for nav links + toggle */
     .nav-container {
       display: flex;
       align-items: center;
@@ -175,6 +174,42 @@
       font-size: 1.2rem;
       text-shadow: 0 0 3px rgba(0,0,0,0.6);
     }
+
+    #chart-editor {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    #chart-editor label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.9rem;
+    }
+
+    #chart-editor input {
+      width: 60px;
+      padding: 3px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    #chart-editor button {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      background: #4f8cff;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #chart-editor button:hover {
+      background: #3b6fd9;
+    }
   </style>
 </head>
 <body>
@@ -196,16 +231,32 @@
   <div class="content-wrapper">
     <div class="dashboard-container" id="welcome-box">
       <h1>Welcome User</h1>
-      <h6>dashboard is not finished :p</h6>
+      <h2>Pie Chart :D</h2>
+      <canvas id="myPieChart"></canvas>
+
+      <div id="chart-editor">
+        <label>
+          something cool:
+          <input type="number" id="completedInput" value="45" min="0" />
+        </label>
+        <label>
+          something:
+          <input type="number" id="inProgressInput" value="30" min="0" />
+        </label>
+        <label>
+          something else:
+          <input type="number" id="pendingInput" value="25" min="0" />
+        </label>
+        <button id="updateChartButton">Update Chart</button>
+      </div>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // Get email from localStorage
     const email = localStorage.getItem('loggedInEmail');
     const welcomeBox = document.getElementById('welcome-box');
 
-    // Map emails to welcome names
     const userNames = {
       "kurt.tran.2005@gmail.com": "Kurt",
       "russi9@mail.ru": "kv.bin",
@@ -213,13 +264,11 @@
     };
 
     if (email) {
-      // Normalize email lowercase for lookup
       const lowerEmail = email.toLowerCase();
       const name = userNames[lowerEmail] || "User";
       welcomeBox.querySelector('h1').textContent = `Welcome ${name}`;
     }
 
-    // Dark mode toggle
     const toggle = document.getElementById('darkModeSwitch');
 
     if (localStorage.getItem('darkMode') === 'enabled') {
@@ -235,6 +284,52 @@
         document.body.classList.remove('dark');
         localStorage.setItem('darkMode', 'disabled');
       }
+      myPieChart.options.plugins.legend.labels.color = getComputedStyle(document.body).getPropertyValue('--text-color').trim();
+      myPieChart.update();
+    });
+
+    const pieData = {
+      labels: ['something cool', 'something', 'something else'],
+      datasets: [{
+        data: [45, 30, 25],
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.7)',
+          'rgba(255, 206, 86, 0.7)',
+          'rgba(255, 99, 132, 0.7)'
+        ],
+        borderColor: [
+          'rgba(75, 192, 192, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(255, 99, 132, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    const ctx = document.getElementById('myPieChart').getContext('2d');
+    const myPieChart = new Chart(ctx, {
+      type: 'pie',
+      data: pieData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: getComputedStyle(document.body).getPropertyValue('--text-color').trim()
+            }
+          }
+        }
+      }
+    });
+
+    document.getElementById('updateChartButton').addEventListener('click', () => {
+      const completed = parseInt(document.getElementById('completedInput').value) || 0;
+      const inProgress = parseInt(document.getElementById('inProgressInput').value) || 0;
+      const pending = parseInt(document.getElementById('pendingInput').value) || 0;
+
+      myPieChart.data.datasets[0].data = [completed, inProgress, pending];
+      myPieChart.update();
     });
   </script>
 </body>
